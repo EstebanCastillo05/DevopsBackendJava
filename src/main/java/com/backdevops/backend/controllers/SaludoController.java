@@ -21,6 +21,6 @@ public class SaludoController {
 
     @GetMapping("/saludo")
     public String decirHola() {
-        return saludoService.obtenerSaludo() + " - Estás en: " + entornoNombre;
+        return saludoService.obtenerSaludo();
     }
 }
