@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class SaludoService {
 
     public String obtenerSaludo() {
-        return "Hola desde SpringBoot prueba de artefacto para build";
+        return "Hola desde SpringBoot prueba de artefacto para build - Cambio Nuevo";
     }
 }
