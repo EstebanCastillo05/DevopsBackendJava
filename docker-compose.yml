@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db-dev: 
+    image: postgres:15-alpine
+    container_name: postgres-dev
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydbdev
+    networks:
+      - net-dev
+
+  backend-dev:
+    build: .
+    container_name: backend-dev
+    ports:
+      - "3000:8080"
+    environment:
+      - ENTORNO_NAME=DESARROLLO
+      - DB_URL=jdbc:postgresql://db-dev:5432/mydbdev 
+      - DB_USER=user
+      - DB_PASS=password
+    depends_on:
+      - db-dev
+    networks:
+      - net-dev
+
+  db-prod:
+    image: postgres:15-alpine
+    container_name: postgres-prod
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydbprod
+    networks:
+      - net-prod
+
+  backend-prod:
+    build: .
+    container_name: backend-prod
+    ports:
+      - "3001:8080"
+    environment:
+      - ENTORNO_NAME=PRODUCCIÓN
+      - DB_URL=jdbc:postgresql://db-prod:5432/mydbprod 
+      - DB_USER=user
+      - DB_PASS=password
+    depends_on:
+      - db-prod
+    networks:
+      - net-prod
+
+networks:
+  net-dev:
+  net-prod:
