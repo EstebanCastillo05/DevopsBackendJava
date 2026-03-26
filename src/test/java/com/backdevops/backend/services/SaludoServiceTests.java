@@ -16,7 +16,7 @@ class SaludoServiceTests {
     @Test
     void testObtenerSaludoReturnsCorrectMessage() {
         String resultado = saludoService.obtenerSaludo();
-        assertEquals("Hola desde SpringBoot", resultado);
+        assertEquals("Hola desde SpringBoot guardado de jar y envio a ", resultado);
     }
 
     @Test
