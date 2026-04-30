@@ -1,0 +1,29 @@
+name: Continuous Deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    name: Deploy en servidor Worker con Docker Compose
+    runs-on: self-hosted  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull image from registry
+        run: |
+          docker pull ${{ secrets.REGISTRY_IP }}:5000/backend:latest
+
+      - name: Deploy with Docker Compose
+        env:
+          REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+        run: |
+          docker-compose down
+          docker-compose up -d db-prod backend-prod
+          docker image prune -f
