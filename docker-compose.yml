@@ -28,12 +28,12 @@ services:
       - net-dev
 
   # Orquestacion de producción
-  db-prod:
+  db-prod: 
     image: postgres:15-alpine
     container_name: postgres-prod
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: mydbprod
     networks:
       - net-prod
@@ -47,11 +47,15 @@ services:
       - ENTORNO_NAME=PRODUCCIÓN
       - DB_URL=jdbc:postgresql://db-prod:5432/mydbprod 
       - DB_USER=user
-      - DB_PASS=password
+      - DB_PASS=${DB_PASS}
     depends_on:
       - db-prod
     networks:
       - net-prod
+
+networks:
+  net-dev:
+  net-prod:
 
 networks:
   net-dev:
