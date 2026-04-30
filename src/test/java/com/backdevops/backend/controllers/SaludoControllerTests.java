@@ -24,7 +24,7 @@ class SaludoControllerTests {
     void testDecirHolaEndpointReturnsOk() {
         ResponseEntity<String> response = restTemplate.getForEntity("/devops/saludo", String.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Hola desde SpringBoot guardado de jar y envio a ", response.getBody());
+        assertEquals("Hola desde SpringBoot guardado de jar", response.getBody());
     }
 
     @Test
@@ -36,6 +36,6 @@ class SaludoControllerTests {
     @Test
     void testSaludoServiceReturnsCorrectMessage() {
         String resultado = saludoService.obtenerSaludo();
-        assertEquals("Hola desde SpringBoot guardado de jar y envio a ", resultado);
+        assertEquals("Hola desde SpringBoot guardado de jar", resultado);
     }
 }
