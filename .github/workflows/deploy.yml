@@ -19,11 +19,18 @@ jobs:
         run: |
           docker pull ${{ secrets.REGISTRY_IP }}:5000/backend:latest
 
-      - name: Deploy with Docker Compose
+      - name: Deploy Prod with docker compose
         env:
           REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
-          docker-compose down
           docker-compose up -d db-prod backend-prod
+          docker image prune -f
+
+      - name: Deploy Dev with docker compose
+        env:
+          REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+        run: |
+          docker-compose up -d db-dev backend-dev
           docker image prune -f
