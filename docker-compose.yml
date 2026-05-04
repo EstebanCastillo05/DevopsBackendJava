@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: mydbdev
+    ports:
+      - "5433:5432
     networks:
       - net-dev
 
@@ -35,6 +37,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: mydbprod
+    ports:
+      - "5434:5432"
     networks:
       - net-prod
 
