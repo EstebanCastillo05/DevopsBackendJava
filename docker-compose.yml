@@ -15,7 +15,7 @@ services:
       - net-dev
 
   backend-dev:
-    build: .
+    image: ${REGISTRY_IP}:5000/backend:latest 
     container_name: backend-dev
     ports:
       - "3000:8080"
