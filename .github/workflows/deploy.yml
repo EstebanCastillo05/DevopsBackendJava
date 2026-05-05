@@ -24,7 +24,7 @@ jobs:
           REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
-          docker-compose up -d db-prod backend-prod
+          docker compose up -d db-prod backend-prod
           docker image prune -f
 
       - name: Deploy Dev with docker compose
@@ -32,5 +32,5 @@ jobs:
           REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
-          docker-compose up -d db-dev backend-dev
+          docker compose up -d db-dev backend-dev
           docker image prune -f
