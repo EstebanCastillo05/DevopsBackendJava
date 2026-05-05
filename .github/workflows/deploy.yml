@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
-    name: Deploy en servidor Worker con Docker Compose
+    name: Deploy en servidor Worker
     runs-on: self-hosted  
     steps:
       - name: Checkout code
@@ -19,18 +19,20 @@ jobs:
         run: |
           docker pull ${{ secrets.REGISTRY_IP }}:5000/backend:latest
 
-      - name: Deploy Prod with docker compose
+      - name: Deploy Prod
         env:
           REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
-          docker compose up -d db-prod backend-prod
+          docker-compose rm -fs backend-prod || true
+          docker-compose up -d db-prod backend-prod
           docker image prune -f
 
-      - name: Deploy Dev with docker compose
+      - name: Deploy Dev
         env:
           REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
-          docker compose up -d db-dev backend-dev
+          docker-compose rm -fs backend-dev || true
+          docker-compose up -d db-dev backend-dev
           docker image prune -f
