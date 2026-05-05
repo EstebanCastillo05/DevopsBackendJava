@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Orquestacion de desarrollo
   db-dev: 
     image: postgres:15-alpine
     container_name: postgres-dev
@@ -18,7 +17,7 @@ services:
     image: ${REGISTRY_IP}:5000/backend:latest 
     container_name: backend-dev
     ports:
-      - "3000:8080"
+      - "3000:8080" 
     environment:
       - ENTORNO_NAME=DESARROLLO
       - DB_URL=jdbc:postgresql://db-dev:5432/mydbdev 
@@ -29,7 +28,6 @@ services:
     networks:
       - net-dev
 
-  # Orquestacion de producción
   db-prod: 
     image: postgres:15-alpine
     container_name: postgres-prod
@@ -46,7 +44,7 @@ services:
     image: ${REGISTRY_IP}:5000/backend:latest
     container_name: backend-prod
     ports:
-      - "3001:8080"
+      - "3001:8080" 
     environment:
       - ENTORNO_NAME=PRODUCCIÓN
       - DB_URL=jdbc:postgresql://db-prod:5432/mydbprod 
