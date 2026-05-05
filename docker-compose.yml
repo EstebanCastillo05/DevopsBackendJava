@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: mydbdev
     ports:
-      - "5433:5432
+      - "5433:5432"
     networks:
       - net-dev
 
@@ -56,10 +56,6 @@ services:
       - db-prod
     networks:
       - net-prod
-
-networks:
-  net-dev:
-  net-prod:
 
 networks:
   net-dev:
