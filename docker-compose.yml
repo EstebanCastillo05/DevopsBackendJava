@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Entorno de Desarrollo
   db-dev: 
     image: postgres:15-alpine
     container_name: postgres-dev
@@ -28,6 +29,7 @@ services:
     networks:
       - net-dev
 
+  # Entorno de Producción
   db-prod: 
     image: postgres:15-alpine
     container_name: postgres-prod
