@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class SaludoService {
 
     public String obtenerSaludo() {
-        return "Hola desde SpringBoot guardado de jar"; // Prueba de saludo para verificar que el servicio funciona correctamente
+        return "Hola desde SpringBoot guardado de jar"; // Prueba 2 antes de presentar
     }
 }
